@@ -1,0 +1,398 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    /* styles.css */
+
+    /* General styling for the page */
+   
+
+    .header-section {
+        position: relative;
+       
+        color: white;
+        overflow: hidden;
+    }
+
+    #backgroundVideo {
+        position: absolute;
+        top: -50px;
+        left: 0;
+        width: 100%;
+        height: calc(100% + 100px);
+        object-fit: cover;
+        z-index: -1;
+        opacity: 0.3;
+    }
+
+    .overlay {
+        background: rgba(0, 0, 0, 0.6);
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
+        position: relative;
+        z-index: 1;
+        flex-direction: column;
+    }
+
+    .header-content {
+        max-width: 600px;
+        position: relative;
+        z-index: 2;
+        padding: 120px 20px 100px;
+        margin: 0 auto;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .market-logo {
+        max-width: 150px;
+        height: auto;
+        margin: 60px auto; /* Increased top margin for visibility */
+        display: block;
+        z-index: 3;
+    }
+
+    .header-content h1 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+    }
+
+    .header-content p {
+        font-size: 1.2em;
+        margin-bottom: 20px;
+    }
+
+    .traders-benefit {
+        font-size: 1.2em;
+        margin-bottom: 30px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+        form input, form select {
+            margin: 10px 0;
+            padding: 10px;
+            width: 250px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        form button {
+            padding: 10px 20px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+    #livePrice {
+        font-size: 1em;
+        color: #ffeb3b;
+        margin-left: 10px;
+    }
+
+    .output-section {
+        margin-top: 40px;
+        margin-bottom: 80px; /* Increased bottom margin */
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        color: black;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        position: relative;
+        z-index: 3;
+        overflow: hidden;
+    }
+
+    .tip {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+        .tip::before {
+            content: '';
+            background-image: url('images/logo.JPG'); /* Use logo as background */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.1; /* Lower opacity for background image */
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1; /* Ensure background image is behind the text */
+        }
+
+    .risk-indicator {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 1.2em;
+        font-weight: bold;
+        padding: 5px 10px;
+        border-radius: 5px;
+        z-index: 2;
+    }
+
+    .risky {
+        background-color: red;
+        color: white;
+    }
+
+    .safe {
+        background-color: green;
+        color: white;
+    }
+
+    .edit-button {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: #ffc107;
+        color: black;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        z-index: 2;
+    }
+
+    #generatedTip {
+        font-size: 1.2em;
+        line-height: 1.5;
+        margin-top: 10px;
+        z-index: 4;
+        position: relative;
+        color: black;
+    }
+
+    #clearData {
+        padding: 10px 20px;
+        background-color: #d9534f;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+
+    .features-section {
+        display: flex;
+        justify-content: space-around;
+        padding: 50px 0;
+        background-color: #f8f9fa;
+    }
+
+    .feature {
+        text-align: center;
+        max-width: 200px;
+    }
+
+        .feature h3 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .feature p {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+    /* Styling for the new information section */
+    .info-section {
+        background-color: rgba(240, 240, 240, 0.9);
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .info-section h2 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .info-section p {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .info-section ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+
+            .info-section ul li {
+                font-size: 1em;
+                margin-bottom: 5px;
+                color: #333;
+            }
+
+    .referral-blocks {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10px;
+    }
+
+    .referral-block {
+        background-color: rgba(255, 255, 255, 0.9); /* Ensure text area is clear */
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        flex: 1;
+        margin: 5px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .referral-block::before {
+            content: '';
+            
+            background-image: url('../../image/images/kotakneo.png'); /* Use Demate image as background */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.1; /* Lower opacity for background image */
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1; /* Ensure background image is behind the text */
+        }
+
+        .referral-block a {
+            text-decoration: none;
+            color: #007bff;
+            position: relative;
+            z-index: 2; /* Ensure text is above the background */
+        }
+
+        .referral-block h3 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .referral-block p {
+            font-size: 0.9em;
+            color: #555;
+        }
+
+   
+</style>
+    <header class="header-section">
+        <!-- Background Video -->
+        <video autoplay muted loop id="backgroundVideo">
+            <source src="~/Image/images/background.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="overlay">
+            <div class="header-content">
+                <!-- Logo added here -->
+                <img src="~/Image/images/logo.JPG" alt="Market Logo" class="market-logo">
+                <h1>Share Market Tips</h1>
+                <p>Enter the details below to generate a market tip:</p>
+                <div class="traders-benefit">
+                    <span>👤 100k+ Traders Benefited</span>
+                </div>
+                <form id="contactForm" method="post">
+                    <input type="text" id="companyName" name="companyName" placeholder="Company Name" required>
+                    <input type="text" id="currentPrice" name="currentPrice" placeholder="Current Market Price" required>
+                    <span id="livePrice"></span>
+                    <input type="text" id="targetPrice" name="targetPrice" placeholder="Expected Target Price" required>
+                    <input type="text" id="stoploss" name="stoploss" placeholder="Stoploss" required>
+                    <input type="text" name="duration" placeholder="Duration (e.g., 2-4 days)" required>
+                    <select id="riskLevel" name="riskLevel" required>
+                        <option value="safe">Safe</option>
+                        <option value="risky">Risky</option>
+                    </select>
+                    <button type="submit">Generate Market Tip</button>
+                </form>
+                <!-- New Information Block -->
+                <div class="info-section">
+                    <h2>Welcome to our Stock Market Investment Learning Group! 🚀</h2>
+                    <p>🌐 Group Rules:</p>
+                    <ul>
+                        <li><strong>Clean Environment:</strong> Keep the group clean and user-friendly.</li>
+                        <li><strong>No External Links:</strong> Avoid sharing external links to maintain the group's focus.</li>
+                        <li><strong>Stay On Topic:</strong> Stick to discussions related to stock market investments.</li>
+                        <li><strong>Disclaimer:</strong> We are not SEBI registered. Investing involves risks; make decisions responsibly.</li>
+                        <li><strong>Referral Alert:</strong> If you're opening a demat account, check out these zero brokerage options:</li>
+                    </ul>
+                    <div class="referral-blocks">
+                        <div class="referral-block">
+                            <a href="https://5paisa.page.link/7rufBVqdVWoPGLXA8" target="_blank">
+                                <h3>1️⃣ <u>5Paisa</u></h3>
+                                <p>Sign up with Referral Code: AYUS049</p>
+                            </a>
+                        </div>
+                        <div class="referral-block">
+                            <a href="https://KotakSecurities.ref-r.com/c/i/32531/88310140?r=wa" target="_blank">
+                                <h3>2️⃣ <u>Kotak Securities</u></h3>
+                            </a>
+                        </div>
+                        <div class="referral-block">
+                            <a href="https://join.dhan.co/?invite=YVUAS49994" target="_blank">
+                                <h3>3️⃣ <u>Dhan</u></h3>
+                                <p>My unique referral code: YVUAS49994</p>
+                            </a>
+                        </div>
+                    </div>
+                    <p>Happy investing! 📊💹</p>
+                </div>
+                <!-- Display Stored Data -->
+                <div id="outputSection" class="output-section">
+                    <!-- Tips will be dynamically appended here -->
+                </div>
+                <button id="clearData">Clear All Tips</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="features-section">
+        <div class="feature">
+            <h3>Research</h3>
+            <p>All our research views are backed by analysis and data as we believe in giving consistent results.</p>
+        </div>
+        <div class="feature">
+            <h3>Customer Focus</h3>
+            <p>An absolute focus on customer’s best interest by aspiring to meet their financial objectives.</p>
+        </div>
+        <div class="feature">
+            <h3>Risk Management</h3>
+            <p>A robust risk management plan to ensure customers can get the best out of our offerings.</p>
+        </div>
+        <div class="feature">
+            <h3>Vibrancy</h3>
+            <p>A young & energetic employee base to deliver the best results for the customer.</p>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+   
+
+ 

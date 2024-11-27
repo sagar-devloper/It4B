@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.Title = "Details";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Info Card</title>
+    <style>
+        .card {
+            width: 80%;
+            max-width: 800px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            margin: 10px auto;
+        }
+
+            .card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: url('background-image.jpg') no-repeat center center/cover;
+                opacity: 0.15;
+                z-index: -1; 
+            }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+            .card-content h3 {
+                margin: 10px 0;
+                font-size: 1.5em;
+                color: #333;
+                font-weight: bold;
+            }
+
+            .card-content p {
+                margin: 5px 0;
+                font-size: 1.2em;
+                color: #555;
+            }
+
+        .edit-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: orange;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+            .edit-btn:hover {
+                background-color: darkorange;
+            }
+
+        .delete-btn {
+            display: inline-block;
+            margin-top: 20px;
+            align-self: center;
+            background-color: red;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+            .delete-btn:hover {
+                background-color: darkred;
+                color:white;
+            }
+
+        .risky-label {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: red;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .safe-label {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: green;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    @foreach (System.Data.DataRow row in Model.Rows)
+    {
+        <div class="card">
+            <button class="edit-btn">Edit</button>
+            <div class="card-content">
+                <h3>Company Name: @row[1]</h3>
+                <p>Current Market Price: @row[2]</p>
+                <p>Expected Target Price: @row[3]</p>
+                <p>Stoploss: @row[4]</p>
+                <p>Duration: @row[5]</p>
+            </div>
+            @if (row[6]?.ToString() == "risky")
+            {
+                <span class="risky-label">Risky</span>
+            }
+            else
+            {
+                <span class="safe-label">Safe</span>
+            }
+            <a href="/Home/DeleteRecord/?sr=@row[0]" class="delete-btn">Delete</a>
+        </div>
+    }
+    <script src="~/Scripts/jquery-3.7.0.min.js"></script>
+</body>
+</html>
